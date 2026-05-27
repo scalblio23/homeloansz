@@ -834,7 +834,28 @@
     answers.email = document.getElementById('email').value.trim();
     answers.phone = document.getElementById('phone').value.trim();
     console.log('SUBMISSION:', answers);
-    // TODO: wire to Formspree / GHL webhook
+
+    const payload = {
+      ...answers,
+      brand: 'homeloans',
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      fetch('https://hook.eu1.make.com/n5boxmava58lg5dfoyweep4tswepo2oy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(err => console.error('Lead submission failed:', err));
+    } catch (err) {
+      console.error('Lead submission error:', err);
+    }
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { brand: 'homeloans' });
+    }
+
     clearProgress();
     stepHistory.push('submitted');
     showStep('submitted');
