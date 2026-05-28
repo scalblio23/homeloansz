@@ -489,15 +489,9 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         </div>
         <h2 class="step-title">Good news — we can help!</h2>
         <p class="step-sub">We've found lenders that match your profile. Pop in your details and a home loan specialist will be in touch within 1 business hour.</p>
-        <div class="field-row">
-          <div class="field">
-            <label class="field-label" for="firstName">First name</label>
-            <input type="text" id="firstName" placeholder="Your first name" />
-          </div>
-          <div class="field">
-            <label class="field-label" for="lastName">Last name</label>
-            <input type="text" id="lastName" placeholder="Your last name" />
-          </div>
+        <div class="field">
+          <label class="field-label" for="fullName">Full name</label>
+          <input type="text" id="fullName" placeholder="Your full name" />
         </div>
         <div class="field">
           <label class="field-label" for="email">Email address</label>
@@ -786,14 +780,13 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
       return amt !== null && amt >= 0;
     }
     if (stepKey === 'success') {
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
+      const fullName = document.getElementById('fullName').value.trim();
       const email = document.getElementById('email').value.trim();
       const phone = document.getElementById('phone').value.trim();
       const consent = document.getElementById('consent').checked;
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       const phoneValid = /^0?4\d{2}\s?\d{3}\s?\d{3}$|^\+?61\s?4\d{2}\s?\d{3}\s?\d{3}$/.test(phone.replace(/\s/g,''));
-      const ok = firstName && lastName && emailValid && phoneValid && consent;
+      const ok = fullName && emailValid && phoneValid && consent;
       if (nextBtn) nextBtn.disabled = !ok;
       return ok;
     }
@@ -825,7 +818,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     });
   });
 
-  ['firstName','lastName','email','phone'].forEach(id => {
+  ['fullName','email','phone'].forEach(id => {
     document.getElementById(id).addEventListener('input', () => validateStep(document.querySelector('[data-step="success"]')));
   });
   document.getElementById('consent').addEventListener('change', () => validateStep(document.querySelector('[data-step="success"]')));
@@ -843,8 +836,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   document.querySelector('[data-action="submit"]').addEventListener('click', () => {
     const step = document.querySelector('[data-step="success"]');
     if (!validateStep(step)) return;
-    answers.firstName = document.getElementById('firstName').value.trim();
-    answers.lastName = document.getElementById('lastName').value.trim();
+    answers.fullName = document.getElementById('fullName').value.trim();
     answers.email = document.getElementById('email').value.trim();
     answers.phone = document.getElementById('phone').value.trim();
     console.log('SUBMISSION:', answers);
