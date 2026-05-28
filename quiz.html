@@ -747,13 +747,11 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
         step.querySelector('.btn-next').disabled = false;
         saveProgress();
 
-        if (group.classList.contains('row-2')) {
-          setTimeout(() => {
-            const currentStepKey = step.dataset.step;
-            const next = getNextStep(currentStepKey);
-            if (next) { stepHistory.push(next); showStep(next); saveProgress(); }
-          }, 220);
-        }
+        setTimeout(() => {
+          const currentStepKey = step.dataset.step;
+          const next = getNextStep(currentStepKey);
+          if (next) { stepHistory.push(next); showStep(next); saveProgress(); }
+        }, 300);
       });
     });
   });
