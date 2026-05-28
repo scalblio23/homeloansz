@@ -133,6 +133,12 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   }
   .options.row-2 .option { justify-content: center; text-align: center; }
   .options.row-2 .option-body { flex: initial; }
+  .options.state-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .options.state-grid .option { justify-content: center; text-align: center; padding: 16px 8px; min-width: 0; }
+  .options.state-grid .option-body { flex: initial; }
+  @media (max-width: 720px) {
+    .options.state-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 
   .field { margin-bottom: 16px; }
   .field-label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
@@ -256,15 +262,15 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
       <div class="quiz-step active" data-step="location">
         <h2 class="step-title">Where are you looking to buy?</h2>
         <p class="step-sub">Helps us match you with lenders active in your area</p>
-        <div class="options row-2" data-question="state">
-          <button type="button" class="option" data-value="NSW"><div class="option-body"><div class="option-title">NSW</div></div></button>
-          <button type="button" class="option" data-value="VIC"><div class="option-body"><div class="option-title">VIC</div></div></button>
-          <button type="button" class="option" data-value="QLD"><div class="option-body"><div class="option-title">QLD</div></div></button>
-          <button type="button" class="option" data-value="WA"><div class="option-body"><div class="option-title">WA</div></div></button>
-          <button type="button" class="option" data-value="SA"><div class="option-body"><div class="option-title">SA</div></div></button>
-          <button type="button" class="option" data-value="TAS"><div class="option-body"><div class="option-title">TAS</div></div></button>
-          <button type="button" class="option" data-value="ACT"><div class="option-body"><div class="option-title">ACT</div></div></button>
-          <button type="button" class="option" data-value="NT"><div class="option-body"><div class="option-title">NT</div></div></button>
+        <div class="options state-grid" data-question="state">
+          <button type="button" class="option" data-value="New South Wales"><div class="option-body"><div class="option-title">NSW</div></div></button>
+          <button type="button" class="option" data-value="Victoria"><div class="option-body"><div class="option-title">VIC</div></div></button>
+          <button type="button" class="option" data-value="Queensland"><div class="option-body"><div class="option-title">QLD</div></div></button>
+          <button type="button" class="option" data-value="Western Australia"><div class="option-body"><div class="option-title">WA</div></div></button>
+          <button type="button" class="option" data-value="South Australia"><div class="option-body"><div class="option-title">SA</div></div></button>
+          <button type="button" class="option" data-value="Tasmania"><div class="option-body"><div class="option-title">TAS</div></div></button>
+          <button type="button" class="option" data-value="Australian Capital Territory"><div class="option-body"><div class="option-title">ACT</div></div></button>
+          <button type="button" class="option" data-value="Northern Territory"><div class="option-body"><div class="option-title">NT</div></div></button>
         </div>
         <div class="step-actions">
           <button class="btn-next" data-action="next" disabled>Continue</button>
