@@ -256,23 +256,15 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
       <div class="quiz-step active" data-step="location">
         <h2 class="step-title">Where are you looking to buy?</h2>
         <p class="step-sub">Helps us match you with lenders active in your area</p>
-        <div class="field">
-          <label class="field-label" for="state">State or Territory</label>
-          <select id="state">
-            <option value="">Select state...</option>
-            <option value="NSW">New South Wales</option>
-            <option value="VIC">Victoria</option>
-            <option value="QLD">Queensland</option>
-            <option value="WA">Western Australia</option>
-            <option value="SA">South Australia</option>
-            <option value="TAS">Tasmania</option>
-            <option value="ACT">Australian Capital Territory</option>
-            <option value="NT">Northern Territory</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="field-label" for="suburb">Suburb or area (optional)</label>
-          <input type="text" id="suburb" placeholder="e.g. Parramatta, Bondi, Surry Hills" />
+        <div class="options row-2" data-question="state">
+          <button type="button" class="option" data-value="NSW"><div class="option-body"><div class="option-title">NSW</div></div></button>
+          <button type="button" class="option" data-value="VIC"><div class="option-body"><div class="option-title">VIC</div></div></button>
+          <button type="button" class="option" data-value="QLD"><div class="option-body"><div class="option-title">QLD</div></div></button>
+          <button type="button" class="option" data-value="WA"><div class="option-body"><div class="option-title">WA</div></div></button>
+          <button type="button" class="option" data-value="SA"><div class="option-body"><div class="option-title">SA</div></div></button>
+          <button type="button" class="option" data-value="TAS"><div class="option-body"><div class="option-title">TAS</div></div></button>
+          <button type="button" class="option" data-value="ACT"><div class="option-body"><div class="option-title">ACT</div></div></button>
+          <button type="button" class="option" data-value="NT"><div class="option-body"><div class="option-title">NT</div></div></button>
         </div>
         <div class="step-actions">
           <button class="btn-next" data-action="next" disabled>Continue</button>
@@ -580,15 +572,8 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
   }
 
   function restoreFormFields() {
-    // Repopulate input fields and option selections from answers
-    if (answers.state) {
-      const stateEl = document.getElementById('state');
-      if (stateEl) stateEl.value = answers.state;
-    }
-    if (answers.suburb) {
-      const subEl = document.getElementById('suburb');
-      if (subEl) subEl.value = answers.suburb;
-    }
+    // Repopulate input fields and option selections from answers.
+    // State is restored by the generic .options reselect loop below.
     const numericFields = [
       ['income', 'incomeAmount'],
       ['propertyValue', 'propertyValueAmount'],
@@ -755,9 +740,7 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     const nextBtn = stepEl.querySelector('.btn-next');
 
     if (stepKey === 'location') {
-      const state = document.getElementById('state').value;
-      answers.state = state;
-      answers.suburb = document.getElementById('suburb').value.trim();
+      const state = answers.state;
       if (nextBtn) nextBtn.disabled = !state;
       return !!state;
     }
@@ -805,8 +788,6 @@ src="https://www.facebook.com/tr?id=1977675273118337&ev=PageView&noscript=1"/></
     input.value = val.toLocaleString('en-AU');
   }
 
-  document.getElementById('state').addEventListener('change', () => { validateStep(document.querySelector('[data-step="location"]')); saveProgress(); });
-  document.getElementById('suburb').addEventListener('input', () => { validateStep(document.querySelector('[data-step="location"]')); saveProgress(); });
 
   ['incomeAmount', 'propertyValueAmount', 'depositAmount'].forEach(id => {
     const el = document.getElementById(id);
